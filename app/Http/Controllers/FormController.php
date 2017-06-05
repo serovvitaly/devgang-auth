@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\FormService;
 use function Couchbase\defaultDecoder;
 use Illuminate\Http\Request;
 
@@ -19,30 +20,20 @@ class FormController extends Controller
 
     /**
      * Show the application dashboard.
-     * @param $merchantId
-     * @param $formName
+     * @param int $merchantId
+     * @param string $formName
+     * @param FormService $formService
      * @return \Illuminate\Http\Response|string
      */
-    public function getForm(int $merchantId, string $formName)
+    public function getForm(int $merchantId, string $formName, FormService $formService)
     {
-        if ($merchantId < 1) {
-            return ';{{';
-        }
+        $formEntity = $formService->getFormEntityByMerchantIdAndFormName($merchantId, $formName);
 
-        $merchant = $merchantId;
+        return $formEntity->render();
+    }
 
-        switch ($formName) {
-            case 'auth':
-                return view('form.auth');
-                break;
-            case 'reg':
-                return view('form.reg');
-                break;
-            case 'reset':
-                return view('form.reset');
-                break;
-            default:
-                return ';{';
-        }
+    public function postForm(int $merchantId, string $formName, FormService $formService, Request $request)
+    {
+        //
     }
 }
