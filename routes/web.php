@@ -14,3 +14,11 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Auth::routes();
+
+Route::get('/panel', 'PanelController@index')->name('panel');
+
+Route::get('/form/{merchantId}/{formName}', 'FormController@getForm')->name('form');
+
+Route::post('/form/{merchantId}/{formName}', 'FormController@postForm')->name('form');
