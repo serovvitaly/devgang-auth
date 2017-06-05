@@ -22,6 +22,13 @@
         body{
             background: none;
         }
+        .nav-tabs>li>a{
+            color: white;
+            font-weight: bold;
+        }
+        .nav-tabs li.active>a{
+            color: #004c77;
+        }
     </style>
 </head>
 <body>
@@ -38,9 +45,7 @@
                 </ul>
 
                 <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <strong>Форма восстановления пароля</strong>
-                    </div>
+
 
                     <div class="panel-body">
                         @if (session('status'))
@@ -95,7 +100,7 @@
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
                                     <button type="submit" class="btn btn-primary">
-                                        Reset Password
+                                        Обновить пароль
                                     </button>
                                 </div>
                             </div>
