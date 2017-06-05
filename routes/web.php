@@ -14,3 +14,9 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Auth::routes();
+
+Route::get('/panel', 'PanelController@index')->name('panel');
+
+Route::get('/form/{merchantId}/{formName}', 'FormController@getForm')->name('form');
