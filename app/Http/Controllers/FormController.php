@@ -1,39 +1,58 @@
 <?php
+/**
+ * Основной контроллер для работы с формами
+ */
 
 namespace App\Http\Controllers;
 
 use App\Services\FormService;
-use function Couchbase\defaultDecoder;
 use Illuminate\Http\Request;
 
 class FormController extends Controller
 {
     /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        //$this->middleware('auth');
-    }
-
-    /**
-     * Show the application dashboard.
-     * @param int $merchantId
+     * Выводит страницу с формой
+     * @param int $ownerUid
      * @param string $formName
      * @param FormService $formService
      * @return \Illuminate\Http\Response|string
      */
-    public function getForm(int $merchantId, string $formName, FormService $formService)
+    public function getForm(int $ownerUid, string $formName, FormService $formService)
     {
-        $formEntity = $formService->getFormEntityByMerchantIdAndFormName($merchantId, $formName);
+        /** Получаем контент страницы формы */
+        $formEntityContent = $formService->getFormEntityContentByOwnerUidAndFormName($ownerUid, $formName);
 
-        return $formEntity->render();
+        /** Выводим контент в браузер */
+        return $formEntityContent;
     }
 
-    public function postForm(int $merchantId, string $formName, FormService $formService, Request $request)
+    /**
+     * Принимает данные, переданные из формы
+     * @param int $ownerUid
+     * @param string $formName
+     * @param FormService $formService
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function postForm(int $ownerUid, string $formName, FormService $formService, Request $request)
     {
-        //
+        /** Обрабатываем данные из формы */
+        $result = $formService->postFormEntityByOwnerUidAndFormName($ownerUid, $formName, $request);
+
+        if ($result) {
+            /**
+             * Если результат обработки данных из формы - положительный,
+             * то делаем редирект на страницу владельца формы...
+             */
+            $redirectUrl = $formService->getFormRedirectUrl($ownerUid, $formName);
+        } else {
+            /**
+             * ... если - отрицательный, то делаем редирект на страницу той же формы,
+             * с выводом сообщения о причине неудачи
+             */
+            $redirectUrl = $formService->getFormUrl($ownerUid, $formName);
+        }
+
+        return redirect($redirectUrl);
     }
 }
