@@ -47,6 +47,6 @@ class FormController extends Controller
     {
         $formToken = $request->get('token');
 
-        return $formToken;
+        return view('form.success', ['formToken' => $formToken]);
     }
 }
