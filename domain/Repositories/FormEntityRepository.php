@@ -10,12 +10,12 @@ use Domain\Interfaces\FormEntityRepositoryInterface;
 class FormEntityRepository implements FormEntityRepositoryInterface
 {
     /**
-     * @param int $ownerUid
+     * @param int $domainUid
      * @param string $formName
      * @return FormEntityInterface
      */
-    public static function find(int $ownerUid, string $formName): FormEntityInterface
+    public static function find(int $domainUid, string $formName): FormEntityInterface
     {
-        return new FormEntity($ownerUid, $formName);
+        return new FormEntity($domainUid, $formName);
     }
 }

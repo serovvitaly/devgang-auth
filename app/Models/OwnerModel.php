@@ -2,9 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 
-class OwnerModel extends Model
+class OwnerModel extends \App\User
 {
     public static function findByUid($uid)
     {

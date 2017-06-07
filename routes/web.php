@@ -19,6 +19,6 @@ Auth::routes();
 
 Route::get('/panel', 'PanelController@index')->name('panel');
 
-Route::get('/form/{ownerUid}/{formName}', 'FormController@getForm')->name('form');
+Route::get('/form/{domainUid}/{formName}', 'FormController@getForm')->name('form');
 
-Route::post('/form/{ownerUid}/{formName}', 'FormController@postForm');
+Route::post('/form/{domainUid}/{formName}', 'FormController@postForm');

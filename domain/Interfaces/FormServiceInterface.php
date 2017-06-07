@@ -5,5 +5,5 @@ namespace Domain\Interfaces;
 
 interface FormServiceInterface
 {
-    public function obtainForm($ownerUid, $formName);
+    public function obtainForm($domainUid, $formName);
 }

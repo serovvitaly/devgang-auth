@@ -13,7 +13,7 @@ class FormService implements FormServiceInterface
         return '';
     }
 
-    public function obtainForm($ownerUid, $formName)
+    public function obtainForm($domainUid, $formName)
     {
         //
     }
