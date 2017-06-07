@@ -91,10 +91,27 @@ class FormService
      */
     public function getFormRedirectUrl(string $domainUid, string $formName): string
     {
-        $formModel = $this->getFormModelByOwnerUidAndFormName($domainUid, $formName);
+        $result = true;
 
-        $url = $formModel->redirect_url;
+        if ($result) {
+            /**
+             * Если результат обработки данных из формы - положительный,
+             * то делаем редирект на страницу владельца формы...
+             */
+            $formModel = $this->getFormModelByOwnerUidAndFormName($domainUid, $formName);
+            $redirectUrl = $formModel->redirect_url;
+        } else {
+            /**
+             * ... если - отрицательный, то делаем редирект на страницу той же формы,
+             * с выводом сообщения о причине неудачи
+             */
+            $redirectUrl = $this->getFormUrl($domainUid, $formName);
+        }
 
-        return $url;
+        $token = 'tjhryeu4w6547787378745rwtet236';
+
+        $redirectUrl .= '?token=' . $token;
+
+        return $redirectUrl;
     }
 }
