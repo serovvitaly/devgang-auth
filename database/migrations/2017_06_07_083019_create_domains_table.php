@@ -17,6 +17,7 @@ class CreateDomainsTable extends Migration
             $table->increments('id');
             $table->string('uid', 80)->unique();
             $table->string('host', 180);
+            $table->string('callback_url', 600);
             $table->integer('owner_id');
             $table->timestamps();
         });

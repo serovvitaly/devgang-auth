@@ -20,6 +20,7 @@ class CreateFormsTable extends Migration
             $table->string('title', 200);
             $table->string('description', 600)->default('');
             $table->string('redirect_url', 600);
+            $table->string('callback_url', 600)->default('');
             $table->timestamps();
             $table->unique(['domain_id', 'name']);
         });
