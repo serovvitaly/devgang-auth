@@ -5,6 +5,7 @@ namespace App\Services;
 
 use Domain\Repositories\FormEntityRepository;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class FormService
 {
@@ -46,6 +47,12 @@ class FormService
      */
     public function getFormEntityContentByOwnerUidAndFormName(string $domainUid, string $formName): string
     {
+        $domainModel = \App\Models\DomainModel::findByUid($domainUid);
+
+        if (is_null($domainModel)) {
+            throw new NotFoundHttpException();
+        }
+
         $formEntity = FormEntityRepository::find($domainUid, $formName);
         return $this->domainFormService->renderForm($formEntity);
     }

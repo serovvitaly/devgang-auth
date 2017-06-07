@@ -68,6 +68,7 @@
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links">
+                    <iframe style="border: 1px; width: 232px; height: 27px;" src="http://localhost:8010/form/widget/login"></iframe>
                     @if (Auth::check())
                         <a href="{{ url('/panel') }}">Panel</a>
                     @else
@@ -79,7 +80,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    222
                 </div>
 
                 <div class="links">

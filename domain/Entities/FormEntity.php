@@ -30,13 +30,12 @@ class FormEntity implements FormEntityInterface
         switch ($this->name) {
             case 'auth':
                 return view('form.auth', $viewData);
-                break;
             case 'reg':
                 return view('form.reg', $viewData);
-                break;
             case 'reset':
                 return view('form.reset', $viewData);
-                break;
+            case 'login':
+                return view('form.login', $viewData);
             default:
                 return ';{';
         }

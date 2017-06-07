@@ -12,7 +12,6 @@
 */
 
 Route::get('/', function () {
-    return '';
     return view('welcome');
 });
 
@@ -34,3 +33,5 @@ Route::post('/form/{domainUid}/{formName}', 'FormController@postForm')
     ->where('domainUid', $regExpPattern)
     ->where('formName', $regExpPattern)
 ;
+
+Route::get('/success', 'FormController@successForm');

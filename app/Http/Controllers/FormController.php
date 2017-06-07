@@ -42,4 +42,11 @@ class FormController extends Controller
 
         return redirect($redirectUrl);
     }
+
+    public function successForm(Request $request)
+    {
+        $formToken = $request->get('token');
+
+        return $formToken;
+    }
 }
