@@ -33,20 +33,16 @@
 </head>
 <body>
 <div id="app">
-    <div style="height: 100px;"></div>
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-
+                @include('ad.block1')
                 <ul class="nav nav-tabs nav-justified">
                     <li role="presentation"><a href="/form/{{ $domainUid }}/auth">Авторизация</a></li>
                     <li role="presentation"><a href="/form/{{ $domainUid }}/reg">Регистрация</a></li>
                     <li role="presentation" class="active"><a href="/form/{{ $domainUid }}/reset">Восстановление</a></li>
                 </ul>
-
                 <div class="panel panel-default">
-
-
                     <div class="panel-body">
                         @if (session('status'))
                             <div class="alert alert-success">
@@ -107,6 +103,7 @@
                         </form>
                     </div>
                 </div>
+                @include('ad.block2')
             </div>
         </div>
     </div>
