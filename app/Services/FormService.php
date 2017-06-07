@@ -20,15 +20,20 @@ class FormService
      * @param string $domainUid
      * @param string $formName
      * @return mixed
+     * @throws \Exception
      */
     public function getFormModelByOwnerUidAndFormName(string $domainUid, string $formName)
     {
-        $ownerModel = \App\Models\OwnerModel::findByUid($domainUid);
+        $domainModel = \App\Models\DomainModel::findByUid($domainUid);
+
+        if (!$domainModel) {
+            throw new \Exception('Domain not found, UID = ' . $domainUid);
+        }
 
         $formModel = \App\Models\FormModel::where([
-            'owner_id' => $ownerModel->id,
+            'domain_id' => $domainModel->id,
             'name' => $formName,
-        ])->one();
+        ])->take(1)->first();
 
         return $formModel;
     }

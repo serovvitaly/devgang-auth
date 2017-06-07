@@ -10,7 +10,7 @@ class FormService implements FormServiceInterface
 {
     public function renderForm(FormEntityInterface $formEntity):string
     {
-        return '';
+        return $formEntity->render();
     }
 
     public function obtainForm($domainUid, $formName)

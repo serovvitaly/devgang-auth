@@ -18,7 +18,8 @@ class CreateFormsTable extends Migration
             $table->integer('domain_id');
             $table->string('name', 80);
             $table->string('title', 200);
-            $table->string('description', 600);
+            $table->string('description', 600)->default('');
+            $table->string('redirect_url', 600);
             $table->timestamps();
             $table->unique(['domain_id', 'name']);
         });

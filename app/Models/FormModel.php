@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class FormModel extends Model
 {
-    //
+    protected $table = 'forms';
 }

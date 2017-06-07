@@ -39,18 +39,20 @@ class FormController extends Controller
         /** Обрабатываем данные из формы */
         $result = $formService->postFormEntityByOwnerUidAndFormName($domainUid, $formName, $request);
 
+        $token = 'tjhryeu4w6547787378745rwtet236';
+
         if ($result) {
             /**
              * Если результат обработки данных из формы - положительный,
              * то делаем редирект на страницу владельца формы...
              */
-            $redirectUrl = $formService->getFormRedirectUrl($domainUid, $formName);
+            $redirectUrl = $formService->getFormRedirectUrl($domainUid, $formName) . '?' . 'token=' . $token;
         } else {
             /**
              * ... если - отрицательный, то делаем редирект на страницу той же формы,
              * с выводом сообщения о причине неудачи
              */
-            $redirectUrl = $formService->getFormUrl($domainUid, $formName);
+            $redirectUrl = $formService->getFormUrl($domainUid, $formName) . '?' . 'token=' . $token;
         }
 
         return redirect($redirectUrl);
