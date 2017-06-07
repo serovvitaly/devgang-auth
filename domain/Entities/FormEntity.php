@@ -3,17 +3,18 @@
 namespace Domain\Entities;
 
 
+use ArrayIterator;
 use Domain\Interfaces\FormEntityInterface;
 
 class FormEntity implements FormEntityInterface
 {
-    protected $merchantId;
+    protected $domainUid;
 
     protected $name;
 
-    public function __construct(int $merchantId, string $name)
+    public function __construct(string $domainUid, string $name)
     {
-        $this->merchantId = $merchantId;
+        $this->domainUid = $domainUid;
         $this->name = $name;
     }
 
@@ -22,18 +23,26 @@ class FormEntity implements FormEntityInterface
      */
     public function render(): string
     {
+        $viewData = [
+            'domainUid' => $this->domainUid,
+        ];
+
         switch ($this->name) {
             case 'auth':
-                return view('form.auth');
-                break;
+                return view('form.auth', $viewData);
             case 'reg':
-                return view('form.reg');
-                break;
+                return view('form.reg', $viewData);
             case 'reset':
-                return view('form.reset');
-                break;
+                return view('form.reset', $viewData);
+            case 'login':
+                return view('form.login', $viewData);
             default:
                 return ';{';
         }
+    }
+
+    public function getDataView(): ArrayIterator
+    {
+        return new ArrayIterator;
     }
 }

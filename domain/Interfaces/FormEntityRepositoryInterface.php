@@ -6,9 +6,9 @@ namespace Domain\Interfaces;
 interface FormEntityRepositoryInterface
 {
     /**
-     * @param int $merchantId
+     * @param string $domainUid
      * @param string $formName
      * @return FormEntityInterface
      */
-    public static function find(int $merchantId, string $formName): FormEntityInterface;
+    public static function find(string $domainUid, string $formName): FormEntityInterface;
 }

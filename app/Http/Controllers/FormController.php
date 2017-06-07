@@ -1,39 +1,52 @@
 <?php
+/**
+ * Основной контроллер для работы с формами
+ */
 
 namespace App\Http\Controllers;
 
 use App\Services\FormService;
-use function Couchbase\defaultDecoder;
 use Illuminate\Http\Request;
 
 class FormController extends Controller
 {
     /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        //$this->middleware('auth');
-    }
-
-    /**
-     * Show the application dashboard.
-     * @param int $merchantId
+     * Выводит страницу с формой
+     * @param string $domainUid
      * @param string $formName
      * @param FormService $formService
      * @return \Illuminate\Http\Response|string
      */
-    public function getForm(int $merchantId, string $formName, FormService $formService)
+    public function getForm(string $domainUid, string $formName, FormService $formService)
     {
-        $formEntity = $formService->getFormEntityByMerchantIdAndFormName($merchantId, $formName);
+        /** Получаем контент страницы формы */
+        $formEntityContent = $formService->getFormEntityContentByOwnerUidAndFormName($domainUid, $formName);
 
-        return $formEntity->render();
+        /** Выводим контент в браузер */
+        return $formEntityContent;
     }
 
-    public function postForm(int $merchantId, string $formName, FormService $formService, Request $request)
+    /**
+     * Принимает данные, полученных из формы
+     * @param string $domainUid
+     * @param string $formName
+     * @param FormService $formService
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function postForm(string $domainUid, string $formName, FormService $formService, Request $request)
     {
-        //
+        $formService->postFormEntityByOwnerUidAndFormName($domainUid, $formName, $request);
+
+        $redirectUrl = $formService->getFormRedirectUrl($domainUid, $formName);
+
+        return redirect($redirectUrl);
+    }
+
+    public function successForm(Request $request)
+    {
+        $formToken = $request->get('token');
+
+        return view('form.success', ['formToken' => $formToken]);
     }
 }

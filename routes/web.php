@@ -15,10 +15,23 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+$regExpPattern = '[a-z]{1}[a-z0-9_\-\.]+';
+
 Auth::routes();
 
-Route::get('/panel', 'PanelController@index')->name('panel');
+Route::get('/panel', 'PanelController@index')
+    ->name('panel')
+;
 
-Route::get('/form/{merchantId}/{formName}', 'FormController@getForm')->name('form');
+Route::get('/form/{domainUid}/{formName}', 'FormController@getForm')
+    ->name('form')
+    ->where('domainUid', $regExpPattern)
+    ->where('formName', $regExpPattern)
+;
 
-Route::post('/form/{merchantId}/{formName}', 'FormController@postForm')->name('form');
+Route::post('/form/{domainUid}/{formName}', 'FormController@postForm')
+    ->where('domainUid', $regExpPattern)
+    ->where('formName', $regExpPattern)
+;
+
+Route::get('/success', 'FormController@successForm');
