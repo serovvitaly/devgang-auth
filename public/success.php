@@ -1,6 +1,80 @@
 <?php
 
-$formToken = $_GET['tiken'];
+/**
+ * Возвращает значение поля из глобального массива $_POST,
+ * если в массиве нет такого поля, или оно равно NULL,
+ * то возвращает значение "по умолчанию" - $default
+ * @param $fieldName
+ * @param null $default
+ * @return null|string
+ */
+function getPostField($fieldName, $default = null)
+{
+    if (!isset($_POST[$fieldName])) {
+        return $default;
+    }
+    return trim($_POST[$fieldName]);
+}
+
+function jsonResponse(array $data)
+{
+    echo json_encode($data);
+    exit;
+}
+
+$db = new PDO('pgsql:dbname=devgang_auth;host=127.0.0.1', 'postgres', '123');
+
+$formToken = $_GET['token'];
+
+
+switch (getPostField('method')) {
+    case 'auth':
+        $login = getPostField('login');
+        $password = getPostField('password');
+        $isSuccess = false;
+        $data = false;
+        if (!empty($login) && !empty($password)) {
+            $isSuccess = true;
+            $q = $db->prepare('select id from users where email = :email and password = :password limit 1');
+            $q->execute([
+                ':email' => $login,
+                ':password' => md5($password),
+            ]);
+            $data = ['count' => $q->rowCount()];
+        }
+        jsonResponse([
+            'success' => $isSuccess,
+            'data' => $data,
+        ]);
+        break;
+    case 'reg':
+        $login = getPostField('login');
+        $password = getPostField('password');
+        $isSuccess = false;
+        $data = false;
+        if (!empty($login) && !empty($password)) {
+            $isSuccess = true;
+            $q = $db->prepare('insert into users set (email = :email and password = :password)');
+            $q->execute([
+                ':email' => $login,
+                ':password' => md5($password),
+            ]);
+            $data = ['count' => $q->rowCount()];
+        }
+        jsonResponse([
+            'success' => $isSuccess,
+            'data' => $data,
+        ]);
+        break;
+    case 'reset':
+        //
+        break;
+    case 'success':
+        //
+        break;
+    default:
+        //
+}
 
 ?>
 <!DOCTYPE html>
