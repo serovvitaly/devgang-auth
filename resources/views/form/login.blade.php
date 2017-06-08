@@ -11,7 +11,7 @@
             padding: 0;
         }
         .button {
-            padding: 8px 16px 7px;
+            padding: 7px 16px 8px;
             margin: 0;
             font-size: 12.5px;
             display: inline-block;

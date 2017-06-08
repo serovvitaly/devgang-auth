@@ -68,7 +68,7 @@
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links">
-                    <iframe style="border: 1px; width: 237px; height: 30px;" src="http://auth.devgang.ru/form/widget/login"></iframe>
+                    <iframe style="border: 1px; width: 242px; height: 30px;" src="http://auth.devgang.ru/form/widget/login"></iframe>
                     @if (Auth::check())
                         <a href="{{ url('/panel') }}">Panel</a>
                     @else

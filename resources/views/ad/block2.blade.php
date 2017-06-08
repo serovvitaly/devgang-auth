@@ -1,1 +1,1 @@
-<div class="alert alert-warning" role="alert">Block2</div>
+<div class="advert-area bottom">Block2</div>
