@@ -35,3 +35,5 @@ Route::post('/form/{domainUid}/{formName}', 'FormController@postForm')
 ;
 
 Route::get('/success', 'FormController@successForm');
+
+Route::post('/callback', 'CallbackController@callback');

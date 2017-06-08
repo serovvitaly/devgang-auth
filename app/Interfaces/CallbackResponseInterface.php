@@ -10,4 +10,10 @@ interface CallbackResponseInterface
      * @return CallbackRequestInterface
      */
     public function getRequest(): CallbackRequestInterface;
+
+    /**
+     * Возвращает статус ответа (true|false)
+     * @return bool
+     */
+    public function isSuccess(): bool;
 }

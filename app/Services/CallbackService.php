@@ -6,6 +6,7 @@ namespace App\Services;
 use App\Interfaces\CallbackRequestInterface;
 use App\Interfaces\CallbackResponseInterface;
 use App\Interfaces\CallbackServiceInterface;
+use Domain\Entities\CallbackResponse;
 
 class CallbackService implements CallbackServiceInterface
 {
@@ -16,6 +17,6 @@ class CallbackService implements CallbackServiceInterface
      */
     public function call(CallbackRequestInterface $request): CallbackResponseInterface
     {
-        // TODO: Implement call() method.
+        return new CallbackResponse($request);
     }
 }
