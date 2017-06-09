@@ -34,7 +34,7 @@ class TokenServiceTest extends TestCase
     {
         $token = $this->tokenService->generateToken();
         $encryptingToken = $this->tokenService->encryptToken($token);
-        $this->assertRegExp('/^[a-zA-Z0-9=]{276}$/', $encryptingToken);
+        $this->assertRegExp('/^[a-zA-Z0-9=]{276,280}$/', $encryptingToken);
     }
 
     /**
