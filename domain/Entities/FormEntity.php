@@ -36,6 +36,12 @@ class FormEntity implements FormEntityInterface
                 return view('form.reset', $viewData);
             case 'login':
                 return view('form.login', $viewData);
+            case 'wp_auth':
+                return view('form.wp_auth', $viewData);
+            case 'wp_reg':
+                return view('form.wp_reg', $viewData);
+            case 'wp_reset':
+                return view('form.wp_reset', $viewData);
             default:
                 return ';{';
         }
