@@ -27,13 +27,11 @@ Route::get('/form/{domainUid}/{formName}', 'FormController@getForm')
     ->name('form')
     ->where('domainUid', $regExpPattern)
     ->where('formName', $regExpPattern)
-    ->middleware('clientIdentify')
 ;
 
 Route::post('/form/{domainUid}/{formName}', 'FormController@postForm')
     ->where('domainUid', $regExpPattern)
     ->where('formName', $regExpPattern)
-    //->middleware('clientIdentify')
 ;
 
 Route::get('/success', 'FormController@successForm');
