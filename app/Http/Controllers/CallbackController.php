@@ -8,6 +8,13 @@ class CallbackController extends Controller
 {
     public function callback(Request $request)
     {
-        return 'foo';
+        $formToken = $request->get('token');
+
+        $tokenModel = \App\Models\TokenModel::findByToken($formToken);
+
+        return [
+            'success' => true,
+            'login' => $tokenModel->login
+        ];
     }
 }

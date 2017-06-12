@@ -47,6 +47,14 @@ class FormController extends Controller
     {
         $formToken = $request->get('token');
 
+        $result = file_get_contents('http://wp.zalipay.com/safeforms/callback?act=check_user');
+
+        $result = json_decode($result);
+
+        if ($result->success === true) {
+            return redirect('http://wp.zalipay.com/safeforms/callback?act=success&token=' . $formToken);
+        }
+
         return view('form.success', ['formToken' => $formToken]);
     }
 }

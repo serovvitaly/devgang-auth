@@ -8,7 +8,8 @@
 @php ($windowHeight = 550)
 
 @section('form')
-    <form name="loginform" id="loginform" action="http://wp.zalipay.com/wp-login.php" method="post">
+    <form name="loginform" id="loginform" method="post">
+        {{ csrf_field() }}
         <p>
             <label for="user_login">Имя пользователя или e-mail<br />
                 <input type="text" name="log" id="user_login" aria-describedby="login_error" class="input" value="" size="20" /></label>

@@ -45,5 +45,26 @@ class DomainsAndFormsTableSeeder extends Seeder
             'title' => 'Форма восстановления пароля',
             'redirect_url' => '/success',
         ]);
+
+        DB::table('forms')->insert([
+            'domain_id' => $domainId,
+            'name' => 'wp_auth',
+            'title' => 'Форма авторизации Wordpress',
+            'redirect_url' => '/success',
+        ]);
+
+        DB::table('forms')->insert([
+            'domain_id' => $domainId,
+            'name' => 'wp_reg',
+            'title' => 'Форма регистрации Wordpress',
+            'redirect_url' => '/success',
+        ]);
+
+        DB::table('forms')->insert([
+            'domain_id' => $domainId,
+            'name' => 'wp_reset',
+            'title' => 'Форма восстановления пароля Wordpress',
+            'redirect_url' => '/success',
+        ]);
     }
 }
